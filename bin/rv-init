@@ -35,6 +35,7 @@ spinner.start();
 download (
   url,
   projectName,
+  {clone: true},
   err => {
     if (err) {
       spinner.fail();
