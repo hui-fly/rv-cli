@@ -6,6 +6,7 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 const ora = require('ora')
 const download = require('download-git-repo')
+const fs = require('fs')
 // const program = require('commander')
 // 读取根目录下的 template.json
 
@@ -58,6 +59,13 @@ inquirer
           console.log(chalk.red(`Generation failed. ${err}`))
           return
         }
+        fs.readFile(`${process.cwd()}/${projectName}/src/App.vue`, 'utf-8', (err,data) => {
+          if (err) console.log(err)
+          let result = data.replace(/test/g, projectName)
+          fs.writeFile(`${process.cwd()}/${projectName}/src/App.vue`,result, 'utf-8',(err)=>{
+            if (err) return console.log(err)
+          })
+        })
         // 结束加载图标
         spinner.succeed();
         console.log(chalk.green('\n Generation completed!'))
