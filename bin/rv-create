@@ -30,7 +30,7 @@ let question = [
     choices: [
       {
         name: 'micro-module(微前端模块-基于vue)',
-        value: 'https://git.qutoutiao.net:insurance/module-demo'
+        value: 'https://github.com:hui-fly/micro-module-demo'
       },
       {
         name: 'micro-module-react(微前端模块-基于react)',
@@ -61,8 +61,15 @@ inquirer
         }
         fs.readFile(`${process.cwd()}/${projectName}/src/App.vue`, 'utf-8', (err,data) => {
           if (err) console.log(err)
-          let result = data.replace(/test/g, projectName)
+          let result = data.replace(/demo/g, projectName)
           fs.writeFile(`${process.cwd()}/${projectName}/src/App.vue`,result, 'utf-8',(err)=>{
+            if (err) return console.log(err)
+          })
+        })
+        fs.readFile(`${process.cwd()}/${projectName}/src/router/index.js`, 'utf-8', (err,data) => {
+          if (err) console.log(err)
+          let result = data.replace(/demo/g, projectName)
+          fs.writeFile(`${process.cwd()}/${projectName}/src/router/index.js`,result, 'utf-8',(err)=>{
             if (err) return console.log(err)
           })
         })
